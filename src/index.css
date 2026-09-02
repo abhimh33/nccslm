@@ -1,0 +1,130 @@
+/* ─── Fonts ─────────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..800;1,14..32,300..800&family=Noto+Sans+Kannada:wght@300;400;500;600;700;800&display=swap');
+@import 'tailwindcss';
+
+/* ─── Design tokens ─────────────────────────────────────────────────────── */
+:root {
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-kn: 'Noto Sans Kannada', 'Inter', system-ui, sans-serif;
+
+  /* Neutral palette */
+  --color-bg:       #f9f8f6;
+  --color-surface:  #ffffff;
+  --color-border:   #e5e1db;
+  --color-ink-1:    #1a1917;
+  --color-ink-2:    #3d3a36;
+  --color-ink-3:    #7a7571;
+  --color-accent:   #1a1917;
+
+  /* Spacing scale shortcut */
+  --section-x: clamp(1rem, 5vw, 2rem);
+}
+
+/* ─── Reset / base ──────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-width: 320px;
+  background: var(--color-bg);
+  color: var(--color-ink-1);
+  font-family: var(--font-kn);
+  font-size: 1rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  font: inherit;
+  background: none;
+  border: none;
+}
+
+/* ─── Kannada-specific typography ───────────────────────────────────────── */
+:lang(kn),
+.lang-kn {
+  font-family: var(--font-kn);
+  line-height: 1.85; /* Kannada glyphs are taller */
+  word-break: break-word;
+}
+
+h1:lang(kn),
+h2:lang(kn),
+h3:lang(kn),
+.lang-kn h1,
+.lang-kn h2,
+.lang-kn h3 {
+  line-height: 1.45;
+  letter-spacing: 0;
+}
+
+/* ─── Tailwind component layer ──────────────────────────────────────────── */
+@layer components {
+  /* Container shell */
+  .shell {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Section heading */
+  .section-label {
+    @apply text-xs font-semibold uppercase tracking-widest text-stone-500;
+  }
+
+  .heading-xl {
+    @apply mt-3 text-3xl font-extrabold leading-tight tracking-tight text-zinc-900 sm:text-4xl md:text-5xl;
+  }
+
+  .heading-lg {
+    @apply text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl;
+  }
+
+  /* Prose paragraph */
+  .prose-body {
+    @apply text-base leading-8 text-zinc-700 sm:text-lg;
+  }
+
+  /* Buttons */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-zinc-900 px-6 py-3 text-sm font-semibold text-white transition-all duration-200 hover:bg-zinc-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:ring-offset-2 active:scale-[0.98];
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-stone-300 bg-white px-6 py-3 text-sm font-semibold text-zinc-800 transition-all duration-200 hover:border-stone-400 hover:bg-stone-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:ring-offset-2 active:scale-[0.98];
+  }
+
+  /* Card surface */
+  .card {
+    @apply rounded-2xl border border-stone-200 bg-white shadow-sm;
+  }
+}
+
+/* ─── Focus ring for keyboard nav ───────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid #1a1917;
+  outline-offset: 3px;
+}
