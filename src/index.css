@@ -85,8 +85,17 @@ h1, h2, h3 {
 
 /* ─── Tailwind component layer ───────────────────────────────────────────── */
 @layer components {
+  /* ── Shell container ──
+     Responsive padding-inline via real @media — NOT @apply with sm:/lg: prefixes,
+     because Tailwind v4 does not support responsive variants inside @layer @apply.
+     mobile  : 16px gutter
+     tablet  : 24px gutter
+     desktop : 32px gutter                                                          */
   .shell {
-    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+    margin-inline: auto;
+    width: 100%;
+    max-width: 72rem;        /* 1152px — same as Tailwind max-w-6xl */
+    padding-inline: 1rem;    /* 16px on mobile */
   }
 
   .section-label {
@@ -169,4 +178,13 @@ h1, h2, h3 {
   background: var(--gold);
   border-radius: 2px;
   margin-top: 0.75rem;
+}
+
+/* ─── Shell responsive gutters ───────────────────────────────────────────── */
+/* These MUST live outside @layer so responsive variants apply correctly      */
+@media (min-width: 640px) {
+  .shell { padding-inline: 1.5rem; }   /* 24px — tablet */
+}
+@media (min-width: 1024px) {
+  .shell { padding-inline: 2rem; }     /* 32px — desktop */
 }
