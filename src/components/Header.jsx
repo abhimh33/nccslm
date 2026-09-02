@@ -29,11 +29,18 @@ export default function Header() {
           aria-label={`${SITE.name} — ಮುಖಪುಟಕ್ಕೆ ಹೋಗಿ`}
         >
           <span
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-xs font-bold text-white"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg overflow-hidden"
             style={{ background: 'var(--navy)' }}
             aria-hidden="true"
           >
-            ನೇ
+            <img
+              src="/images/logo.png"
+              alt=""
+              width="36"
+              height="36"
+              style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
+              loading="eager"
+            />
           </span>
           <span
             className="hidden text-sm font-semibold sm:block sm:max-w-[280px] lg:max-w-none"

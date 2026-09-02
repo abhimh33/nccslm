@@ -53,10 +53,10 @@ export default function AboutSection() {
               ವಿಳಾಸ
             </p>
             <address className="mt-3 not-italic text-sm leading-7" style={{ color: 'var(--ink-2)' }}>
-              {SITE.address.map((line, i) => (
+              {SITE.addressKn.map((line, i) => (
                 <span key={i}>
                   {line}
-                  {i < SITE.address.length - 1 && <br />}
+                  {i < SITE.addressKn.length - 1 && <br />}
                 </span>
               ))}
             </address>

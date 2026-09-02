@@ -36,9 +36,11 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  width: 100%;
 }
 
 body {
+  width: 100%;
   min-width: 320px;
   background: var(--cream);
   color: var(--ink-1);

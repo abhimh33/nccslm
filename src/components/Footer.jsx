@@ -12,11 +12,18 @@ export default function Footer() {
           <div className="max-w-xs">
             <div className="flex items-center gap-3">
               <span
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-xs font-bold"
-                style={{ background: 'var(--gold)', color: 'var(--white)' }}
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg overflow-hidden"
+                style={{ background: 'var(--gold)' }}
                 aria-hidden="true"
               >
-                ನೇ
+                <img
+                  src="/images/logo.png"
+                  alt=""
+                  width="36"
+                  height="36"
+                  style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
+                  loading="lazy"
+                />
               </span>
               <p className="text-sm font-semibold text-white">{SITE.name}</p>
             </div>
