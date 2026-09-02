@@ -24,80 +24,100 @@
   --border-light: #ebe7e0;
 }
 
-/* ─── Reset ──────────────────────────────────────────────────────────────── */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+/* ─── Reset — inside @layer base so it CANNOT override .shell padding ─────── */
+/*
+   ROOT CAUSE FIX:
+   Previously  * { padding: 0 }  lived in UNLAYERED CSS.
+   Unlayered styles beat ALL @layer rules in the cascade.
+   So * { padding: 0 }  silently wiped out .shell padding-inline every time.
+   Moving the reset into @layer base gives it the LOWEST cascade priority,
+   allowing .shell (class selector, higher specificity) to win correctly.
+*/
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    width: 100%;
+  }
+
+  body {
+    width: 100%;
+    min-width: 320px;
+    background: var(--cream);
+    color: var(--ink-1);
+    font-family: var(--font-kn);
+    font-size: 1rem;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  img, video {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  button {
+    cursor: pointer;
+    font: inherit;
+    background: none;
+    border: none;
+  }
+
+  h1, h2, h3 {
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+  }
+
+  :lang(kn),
+  .lang-kn {
+    font-family: var(--font-kn);
+    line-height: 1.85;
+    word-break: break-word;
+  }
 }
 
-html {
-  scroll-behavior: smooth;
-  -webkit-text-size-adjust: 100%;
+/* ─── Shell container — UNLAYERED CSS ────────────────────────────────────────
+   Lives outside any @layer so it is "unlayered" CSS.
+   In the cascade: unlayered > @layer utilities > @layer components > @layer base.
+   The class selector (.shell, specificity 0-1-0) also beats the universal
+   reset (* { padding:0 }, specificity 0-0-0) at the same unlayered level.
+   Result: padding-inline is ALWAYS applied, never wiped by the * reset.
+   ─────────────────────────────────────────────────────────────────────────── */
+.shell {
+  margin-inline: auto;
   width: 100%;
+  max-width: 72rem;         /* 1152 px — matches Tailwind max-w-6xl */
+  padding-inline: 1rem;     /* 16 px — mobile */
 }
 
-body {
-  width: 100%;
-  min-width: 320px;
-  background: var(--cream);
-  color: var(--ink-1);
-  font-family: var(--font-kn);
-  font-size: 1rem;
-  line-height: 1.7;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
+@media (min-width: 640px) {
+  .shell { padding-inline: 1.5rem; }  /* 24 px — tablet  */
 }
-
-img, video {
-  display: block;
-  max-width: 100%;
-  height: auto;
+@media (min-width: 1024px) {
+  .shell { padding-inline: 2rem; }    /* 32 px — desktop */
 }
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-button {
-  cursor: pointer;
-  font: inherit;
-  background: none;
-  border: none;
-}
-
-/* ─── Kannada-specific typography ────────────────────────────────────────── */
-:lang(kn),
-.lang-kn {
-  font-family: var(--font-kn);
-  line-height: 1.85;
-  word-break: break-word;
-}
-
-h1, h2, h3 {
-  line-height: 1.4;
-  letter-spacing: -0.01em;
+@media (min-width: 1280px) {
+  .shell { padding-inline: 3rem; }    /* 48 px — wide    */
 }
 
 /* ─── Tailwind component layer ───────────────────────────────────────────── */
 @layer components {
-  /* ── Shell container ──
-     Responsive padding-inline via real @media — NOT @apply with sm:/lg: prefixes,
-     because Tailwind v4 does not support responsive variants inside @layer @apply.
-     mobile  : 16px gutter
-     tablet  : 24px gutter
-     desktop : 32px gutter                                                          */
-  .shell {
-    margin-inline: auto;
-    width: 100%;
-    max-width: 72rem;        /* 1152px — same as Tailwind max-w-6xl */
-    padding-inline: 1rem;    /* 16px on mobile */
-  }
-
   .section-label {
     font-size: 0.7rem;
     font-weight: 700;
@@ -127,9 +147,7 @@ h1, h2, h3 {
     @apply inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold text-white transition-all duration-200 active:scale-[0.98];
     background: var(--navy);
   }
-  .btn-primary:hover {
-    background: var(--navy-light);
-  }
+  .btn-primary:hover { background: var(--navy-light); }
   .btn-primary:focus-visible {
     outline: 2px solid var(--gold);
     outline-offset: 2px;
@@ -155,9 +173,7 @@ h1, h2, h3 {
     background: var(--gold);
     color: var(--white);
   }
-  .btn-gold:hover {
-    background: var(--gold-light);
-  }
+  .btn-gold:hover { background: var(--gold-light); }
 
   .card {
     @apply rounded-xl border bg-white;
@@ -178,13 +194,4 @@ h1, h2, h3 {
   background: var(--gold);
   border-radius: 2px;
   margin-top: 0.75rem;
-}
-
-/* ─── Shell responsive gutters ───────────────────────────────────────────── */
-/* These MUST live outside @layer so responsive variants apply correctly      */
-@media (min-width: 640px) {
-  .shell { padding-inline: 1.5rem; }   /* 24px — tablet */
-}
-@media (min-width: 1024px) {
-  .shell { padding-inline: 2rem; }     /* 32px — desktop */
 }
