@@ -57,7 +57,7 @@ export default function ServicesSection() {
           <div className="mb-6 flex items-center gap-3">
             <span
               className="flex h-8 w-8 items-center justify-center rounded-lg text-sm text-white"
-              style={{ background: 'var(--gold)' }}
+              style={{ background: 'var(--navy)' }}
               aria-hidden="true"
             >
               ₹
@@ -73,7 +73,7 @@ export default function ServicesSection() {
               >
                 <span
                   className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded text-xs font-bold text-white"
-                  style={{ background: 'var(--navy)' }}
+                  style={{ background: 'var(--gold)' }}
                   aria-hidden="true"
                 >
                   {i + 1}

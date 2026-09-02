@@ -89,11 +89,11 @@ export default function HeroSection() {
 
           {/* Image column — bank photo: object-contain so full image is visible */}
           <div
-            className="w-full rounded-2xl shadow-2xl"
+            className="w-full overflow-hidden rounded-2xl shadow-2xl"
             style={{
               background: 'rgba(255,255,255,0.06)',
               border: '1px solid rgba(255,255,255,0.12)',
-              overflow: 'hidden',
+              minHeight: '320px',
             }}
           >
             <img
@@ -104,9 +104,9 @@ export default function HeroSection() {
               style={{
                 display: 'block',
                 width: '100%',
-                height: 'auto',
-                maxHeight: '340px',
-                objectFit: 'contain',
+                height: '100%',
+                minHeight: '320px',
+                objectFit: 'cover',
                 objectPosition: 'center center',
               }}
               loading="eager"

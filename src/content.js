@@ -29,11 +29,10 @@ export const SITE = {
 }
 
 export const NAV = [
-  { label: 'ಮುಖಪುಟ',    href: '#home'     },
-  { label: 'ನಮ್ಮ ಬಗ್ಗೆ', href: '#about'    },
-  { label: 'ಸೇವೆಗಳು',   href: '#services' },
-  { label: 'ಚಿತ್ರಗಳು',   href: '#gallery'  },
-  { label: 'ಸಂಪರ್ಕಿಸಿ', href: '#contact'  },
+  { label: 'ಮುಖಪುಟ',           href: '#home'     },
+  { label: 'ನಮ್ಮ ಬಗ್ಗೆ',        href: '#about'    },
+  { label: 'ಸೇವೆಗಳು',          href: '#services' },
+  { label: 'ನಮ್ಮ ಸಿಬ್ಬಂದಿಗಳು', href: '#gallery'  },
 ]
 
 export const HERO = {
@@ -80,8 +79,8 @@ export const DEPOSIT_SERVICES = {
 
 // Gallery — order: photo-2, photo-1, photo-3 (as specified)
 export const GALLERY = {
-  kicker: 'ಚಿತ್ರಗಳು',
-  title: 'ನಮ್ಮ ಚಿತ್ರಗಳು',
+  kicker: '',
+  title: 'ನಮ್ಮ ಸಿಬ್ಬಂದಿಗಳು',
   photos: [
     {
       src: '/images/photo-2.jpg',
@@ -105,7 +104,7 @@ export const GALLERY = {
 }
 
 export const CONTACT = {
-  kicker: 'ಸಂಪರ್ಕಿಸಿ',
+  kicker: '',
   title: 'ನಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಿ',
   subtitle: 'ಹೆಚ್ಚಿನ ಮಾಹಿತಿಗಾಗಿ ನಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಿ.',
 }
