@@ -1,121 +1,131 @@
-/**
- * Header.jsx — Sticky navigation bar with language toggle and mobile menu.
- *
- * Props:
- *   text       — current language's content object
- *   language   — 'kn' | 'en'
- *   onToggleLang — function to toggle language
- */
-
 import { useState, useEffect } from 'react'
+import { SITE, NAV } from '../content.js'
 
-export default function Header({ text, language, onToggleLang }) {
-  const [menuOpen, setMenuOpen]   = useState(false)
-  const [scrolled, setScrolled]   = useState(false)
+export default function Header() {
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
 
-  /* Compact header on scroll */
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 48)
+    const onScroll = () => setScrolled(window.scrollY > 40)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  /* Close mobile menu on route-hash click */
   const closeMenu = () => setMenuOpen(false)
 
   return (
     <header
       className={`sticky top-0 z-50 border-b transition-all duration-300 ${
         scrolled
-          ? 'border-stone-200/80 bg-white/90 shadow-sm backdrop-blur-md'
-          : 'border-transparent bg-white/70 backdrop-blur-sm'
+          ? 'border-[var(--border)] bg-white/95 shadow-sm backdrop-blur-md'
+          : 'border-transparent bg-white/80 backdrop-blur-sm'
       }`}
     >
-      <nav className="shell flex items-center justify-between py-4">
-        {/* ── Logo / Site name ── */}
+      <nav className="shell flex items-center justify-between py-3">
+        {/* ── Logo / Org name ── */}
         <a
           href="#home"
           className="flex items-center gap-3 focus-visible:rounded-lg"
-          aria-label={`${text.siteName} — ಮುಖಪುಟಕ್ಕೆ ಹೋಗಿ`}
+          aria-label={`${SITE.name} — ಮುಖಪುಟಕ್ಕೆ ಹೋಗಿ`}
         >
           <span
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-zinc-900 text-sm font-bold text-white"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-xs font-bold text-white"
+            style={{ background: 'var(--navy)' }}
             aria-hidden="true"
           >
-            {text.siteNameShort}
+            ನೇ
           </span>
-          <span className="text-base font-semibold tracking-tight text-zinc-900 sm:text-lg">
-            {text.siteName}
+          <span
+            className="hidden text-sm font-semibold sm:block sm:max-w-[280px] lg:max-w-none"
+            style={{ color: 'var(--navy)' }}
+          >
+            {SITE.name}
+          </span>
+          <span
+            className="text-sm font-semibold sm:hidden"
+            style={{ color: 'var(--navy)' }}
+          >
+            {SITE.nameShort}
           </span>
         </a>
 
-        {/* ── Desktop nav links ── */}
-        <div className="hidden items-center gap-7 md:flex" role="navigation" aria-label="Main navigation">
-          {text.nav.map((item) => (
+        {/* ── Desktop nav ── */}
+        <div className="hidden items-center gap-6 lg:flex" role="navigation" aria-label="ಮುಖ್ಯ ಸಂಚಾಲನೆ">
+          {NAV.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className="text-sm font-medium text-zinc-600 transition-colors duration-150 hover:text-zinc-900"
+              className="text-sm font-medium transition-colors duration-150 hover:opacity-80"
+              style={{ color: 'var(--ink-2)' }}
             >
               {item.label}
             </a>
           ))}
+          {/* Phone CTA */}
+          <a
+            href={`tel:${SITE.phoneTel}`}
+            className="btn-primary !rounded-lg !px-4 !py-2 !text-xs"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+            {SITE.phone}
+          </a>
         </div>
 
-        {/* ── Right controls ── */}
-        <div className="flex items-center gap-2">
-          {/* Language toggle */}
-          <button
-            type="button"
-            onClick={onToggleLang}
-            className="rounded-full border border-stone-300 bg-white px-3 py-1.5 text-xs font-bold text-zinc-700 transition hover:border-stone-400 hover:text-zinc-900 focus-visible:outline-offset-2"
-            aria-label={language === 'kn' ? 'Switch to English' : 'ಕನ್ನಡಕ್ಕೆ ಬದಲಿಸಿ'}
-          >
-            {language === 'kn' ? 'EN' : 'ಕ'}
-          </button>
-
-          {/* Mobile hamburger */}
-          <button
-            type="button"
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-stone-300 bg-white text-zinc-700 transition hover:bg-stone-50 md:hidden"
-            onClick={() => setMenuOpen((open) => !open)}
-            aria-expanded={menuOpen}
-            aria-controls="mobile-menu"
-            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-          >
-            {menuOpen ? (
-              /* X icon */
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                <path d="M2 2l12 12M14 2L2 14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-              </svg>
-            ) : (
-              /* Hamburger icon */
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                <path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-              </svg>
-            )}
-          </button>
-        </div>
+        {/* ── Mobile hamburger ── */}
+        <button
+          type="button"
+          className="inline-flex h-9 w-9 items-center justify-center rounded-lg border bg-white lg:hidden"
+          style={{ borderColor: 'var(--border)' }}
+          onClick={() => setMenuOpen((o) => !o)}
+          aria-expanded={menuOpen}
+          aria-controls="mobile-menu"
+          aria-label={menuOpen ? 'ಮೆನು ಮುಚ್ಚಿ' : 'ಮೆನು ತೆರೆಯಿರಿ'}
+        >
+          {menuOpen ? (
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M2 2l12 12M14 2L2 14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+            </svg>
+          ) : (
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+            </svg>
+          )}
+        </button>
       </nav>
 
-      {/* ── Mobile dropdown menu ── */}
+      {/* ── Mobile menu ── */}
       {menuOpen && (
-        <div id="mobile-menu" className="shell pb-4 md:hidden">
+        <div id="mobile-menu" className="shell pb-4 lg:hidden">
           <nav
-            className="rounded-2xl border border-stone-200 bg-white p-3 shadow-md"
+            className="rounded-xl border bg-white p-3 shadow-lg"
+            style={{ borderColor: 'var(--border)' }}
             role="navigation"
-            aria-label="Mobile navigation"
+            aria-label="ಮೊಬೈಲ್ ಸಂಚಾಲನೆ"
           >
-            {text.nav.map((item) => (
+            {NAV.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
-                className="block rounded-xl px-4 py-2.5 text-base font-medium text-zinc-700 transition hover:bg-stone-100 hover:text-zinc-900"
+                className="block rounded-lg px-4 py-2.5 text-base font-medium transition hover:bg-stone-50"
+                style={{ color: 'var(--ink-2)' }}
                 onClick={closeMenu}
               >
                 {item.label}
               </a>
             ))}
+            <div className="mt-2 border-t pt-3" style={{ borderColor: 'var(--border-light)' }}>
+              <a
+                href={`tel:${SITE.phoneTel}`}
+                className="btn-primary w-full justify-center !text-sm"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+                {SITE.phone}
+              </a>
+            </div>
           </nav>
         </div>
       )}

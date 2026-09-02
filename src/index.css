@@ -1,26 +1,30 @@
-/* ─── Fonts ─────────────────────────────────────────────────────────────── */
+/* ─── Fonts ──────────────────────────────────────────────────────────────── */
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..800;1,14..32,300..800&family=Noto+Sans+Kannada:wght@300;400;500;600;700;800&display=swap');
 @import 'tailwindcss';
 
-/* ─── Design tokens ─────────────────────────────────────────────────────── */
+/* ─── Design tokens — trustworthy cooperative palette ────────────────────── */
 :root {
   --font-sans: 'Inter', system-ui, sans-serif;
   --font-kn: 'Noto Sans Kannada', 'Inter', system-ui, sans-serif;
 
-  /* Neutral palette */
-  --color-bg:       #f9f8f6;
-  --color-surface:  #ffffff;
-  --color-border:   #e5e1db;
-  --color-ink-1:    #1a1917;
-  --color-ink-2:    #3d3a36;
-  --color-ink-3:    #7a7571;
-  --color-accent:   #1a1917;
-
-  /* Spacing scale shortcut */
-  --section-x: clamp(1rem, 5vw, 2rem);
+  /* Cooperative identity palette */
+  --navy:         #1b2e4a;
+  --navy-deep:    #122035;
+  --navy-light:   #2a4570;
+  --gold:         #c2952e;
+  --gold-light:   #d4a94a;
+  --gold-soft:    #f5ebd5;
+  --cream:        #faf8f4;
+  --cream-warm:   #f3efe8;
+  --white:        #ffffff;
+  --ink-1:        #1a1917;
+  --ink-2:        #3d3a36;
+  --ink-3:        #6b6660;
+  --border:       #e2ddd5;
+  --border-light: #ebe7e0;
 }
 
-/* ─── Reset / base ──────────────────────────────────────────────────────── */
+/* ─── Reset ──────────────────────────────────────────────────────────────── */
 *,
 *::before,
 *::after {
@@ -36,8 +40,8 @@ html {
 
 body {
   min-width: 320px;
-  background: var(--color-bg);
-  color: var(--color-ink-1);
+  background: var(--cream);
+  color: var(--ink-1);
   font-family: var(--font-kn);
   font-size: 1rem;
   line-height: 1.7;
@@ -46,8 +50,7 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-img,
-video {
+img, video {
   display: block;
   max-width: 100%;
   height: auto;
@@ -65,66 +68,103 @@ button {
   border: none;
 }
 
-/* ─── Kannada-specific typography ───────────────────────────────────────── */
+/* ─── Kannada-specific typography ────────────────────────────────────────── */
 :lang(kn),
 .lang-kn {
   font-family: var(--font-kn);
-  line-height: 1.85; /* Kannada glyphs are taller */
+  line-height: 1.85;
   word-break: break-word;
 }
 
-h1:lang(kn),
-h2:lang(kn),
-h3:lang(kn),
-.lang-kn h1,
-.lang-kn h2,
-.lang-kn h3 {
-  line-height: 1.45;
-  letter-spacing: 0;
+h1, h2, h3 {
+  line-height: 1.4;
+  letter-spacing: -0.01em;
 }
 
-/* ─── Tailwind component layer ──────────────────────────────────────────── */
+/* ─── Tailwind component layer ───────────────────────────────────────────── */
 @layer components {
-  /* Container shell */
   .shell {
     @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
   }
 
-  /* Section heading */
   .section-label {
-    @apply text-xs font-semibold uppercase tracking-widest text-stone-500;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--gold);
   }
 
   .heading-xl {
-    @apply mt-3 text-3xl font-extrabold leading-tight tracking-tight text-zinc-900 sm:text-4xl md:text-5xl;
+    @apply mt-3 text-2xl font-bold sm:text-3xl md:text-4xl;
+    color: var(--navy);
+    line-height: 1.35;
   }
 
   .heading-lg {
-    @apply text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl;
+    @apply text-xl font-bold sm:text-2xl;
+    color: var(--navy);
+    line-height: 1.4;
   }
 
-  /* Prose paragraph */
   .prose-body {
-    @apply text-base leading-8 text-zinc-700 sm:text-lg;
+    @apply text-base leading-8 sm:text-lg;
+    color: var(--ink-2);
   }
 
-  /* Buttons */
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-zinc-900 px-6 py-3 text-sm font-semibold text-white transition-all duration-200 hover:bg-zinc-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:ring-offset-2 active:scale-[0.98];
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold text-white transition-all duration-200 active:scale-[0.98];
+    background: var(--navy);
+  }
+  .btn-primary:hover {
+    background: var(--navy-light);
+  }
+  .btn-primary:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
   }
 
   .btn-outline {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border border-stone-300 bg-white px-6 py-3 text-sm font-semibold text-zinc-800 transition-all duration-200 hover:border-stone-400 hover:bg-stone-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:ring-offset-2 active:scale-[0.98];
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border px-6 py-3 text-sm font-semibold transition-all duration-200 active:scale-[0.98];
+    border-color: var(--navy);
+    color: var(--navy);
+    background: transparent;
+  }
+  .btn-outline:hover {
+    background: var(--navy);
+    color: var(--white);
+  }
+  .btn-outline:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
   }
 
-  /* Card surface */
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold transition-all duration-200 active:scale-[0.98];
+    background: var(--gold);
+    color: var(--white);
+  }
+  .btn-gold:hover {
+    background: var(--gold-light);
+  }
+
   .card {
-    @apply rounded-2xl border border-stone-200 bg-white shadow-sm;
+    @apply rounded-xl border bg-white;
+    border-color: var(--border);
   }
 }
 
-/* ─── Focus ring for keyboard nav ───────────────────────────────────────── */
+/* ─── Focus ring ─────────────────────────────────────────────────────────── */
 :focus-visible {
-  outline: 2px solid #1a1917;
+  outline: 2px solid var(--gold);
   outline-offset: 3px;
+}
+
+/* ─── Section divider ────────────────────────────────────────────────────── */
+.section-divider {
+  width: 48px;
+  height: 3px;
+  background: var(--gold);
+  border-radius: 2px;
+  margin-top: 0.75rem;
 }

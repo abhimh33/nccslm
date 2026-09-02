@@ -1,16 +1,6 @@
-/**
- * GallerySection.jsx — 3-photo responsive gallery.
- *
- * Image files expected at:
- *   public/images/photo-1.jpg
- *   public/images/photo-2.jpg
- *   public/images/photo-3.jpg
- *
- * Props:
- *   text — current language's content.gallery object
- */
+import { GALLERY } from '../content.js'
 
-export default function GallerySection({ text }) {
+export default function GallerySection() {
   return (
     <section
       id="gallery"
@@ -19,38 +9,44 @@ export default function GallerySection({ text }) {
     >
       {/* ── Section header ── */}
       <div className="mb-10">
-        <p className="section-label">{text.kicker}</p>
+        <p className="section-label">{GALLERY.kicker}</p>
         <h2 id="gallery-heading" className="heading-xl mt-3">
-          {text.title}
+          {GALLERY.title}
         </h2>
+        <div className="section-divider" />
       </div>
 
       {/* ── Photo grid ── */}
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {text.photos.map((photo, i) => (
+        {GALLERY.photos.map((photo, i) => (
           <figure
             key={i}
-            className="group overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+            className="group overflow-hidden rounded-xl border bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+            style={{ borderColor: 'var(--border)' }}
           >
             <div className="relative overflow-hidden">
               <img
                 src={photo.src}
                 alt={photo.alt}
-                width="720"
-                height="540"
-                className="h-64 w-full object-cover transition-transform duration-500 group-hover:scale-105 sm:h-72"
+                width="640"
+                height="480"
+                className="h-64 w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04] sm:h-72 md:h-80"
                 loading="lazy"
                 decoding="async"
+                onError={(e) => {
+                  // Graceful fallback if image is missing
+                  e.currentTarget.style.display = 'none'
+                  e.currentTarget.nextElementSibling.style.display = 'flex'
+                }}
               />
-              {/* Subtle overlay on hover */}
+              {/* Fallback placeholder */}
               <div
-                className="absolute inset-0 bg-zinc-900/0 transition-all duration-300 group-hover:bg-zinc-900/10"
-                aria-hidden="true"
-              />
+                className="hidden h-64 w-full items-center justify-center text-sm sm:h-72 md:h-80"
+                style={{ background: 'var(--cream-warm)', color: 'var(--ink-3)' }}
+              >
+                ಚಿತ್ರ ಲಭ್ಯವಿಲ್ಲ
+              </div>
             </div>
-            <figcaption className="border-t border-stone-100 bg-white px-5 py-3 text-sm font-medium text-zinc-600">
-              {photo.caption}
-            </figcaption>
           </figure>
         ))}
       </div>
