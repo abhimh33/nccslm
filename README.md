@@ -1,28 +1,28 @@
-# NCCSLM – Modern Kannada Cooperative Society Website
+# NCCSLM – Kannada Cooperative Society Website
 
-A modern single-page website for Netaji Credit Co-operative Society Ltd. built with React, Vite, and Tailwind CSS.
+A clean, modern single-page website for Netaji Credit Co-operative Society Ltd., built with React, Vite, and Tailwind CSS.
 
-Live domain: https://nccslm.in/
+Live site: https://nccslm.in/
 
-## Project overview
+## Overview
 
-This project is a responsive, single-page website designed for a cooperative society with:
+This project is a responsive single-page website for a cooperative society with:
 
-- Kannada-first content and typography
-- clean modern layout
+- Kannada-first content and professional typography
 - smooth in-page navigation
-- service highlights and member gallery
-- contact section with phone and email
-- SEO metadata for production deployment
+- hero section with branding and photography
+- services and membership staff gallery
+- contact card section with phone, email, and address
+- SEO metadata and Vercel-ready deployment structure
 
-## Tech stack
+## Stack
 
 - React
 - Vite
 - Tailwind CSS
 - JavaScript
 
-## Local development
+## Run locally
 
 ```bash
 npm install
@@ -35,48 +35,47 @@ Then open:
 http://localhost:5173/
 ```
 
-## Production build
+## Build for production
 
 ```bash
 npm run build
 ```
 
-## Deployment
+## Deploy to Vercel
 
-This project is Vercel-ready.
-
-1. Push the repository to GitHub.
-2. Import the repo in Vercel.
-3. Deploy using the default Vite settings.
+1. Push this repository to GitHub.
+2. Open Vercel and import the repo.
+3. Use the default Vite settings.
 4. Add the custom domain:
    - https://nccslm.in/
-5. Configure the DNS records as shown in the Vercel dashboard.
+5. Configure the DNS records exactly as Vercel suggests.
 
-## Important files
+## Important project files
 
-- `src/content.js` — all website text and content
-- `src/components/` — reusable UI components
-- `src/sections/` — page sections
-- `src/index.css` — styles and design tokens
-- `public/images/` — image assets
-- `index.html` — metadata and SEO tags
+- `src/App.jsx` – main page structure
+- `src/content.js` – website content in Kannada and English
+- `src/components/` – reusable UI components
+- `src/sections/` – major page sections
+- `src/index.css` – design system, typography, spacing, and colors
+- `index.html` – title, description, Open Graph, and favicon metadata
+- `public/images/` – final site images
 
-## Image folder
+## Required images
 
-Place your site images in:
+Place the images in:
 
 ```text
 public/images/
 ```
 
-Use files like:
+Recommended files:
 
 - `logo.png`
-- `bank_photo.png`
+- `bank_photo1.jpeg`
 - `row_photo1.jpeg`
 
 ## Notes
 
-- Kannada text is kept as real Unicode text, not converted to images.
-- The site is optimized for mobile-friendly rendering and responsive layout.
-- No backend, database, or authentication is required.
+- Kannada is rendered as Unicode text and remains selectable/searchable.
+- The design is mobile-first and responsive.
+- No backend, database, authentication, or API is required.

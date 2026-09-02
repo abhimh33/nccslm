@@ -97,7 +97,7 @@ export default function HeroSection() {
             }}
           >
             <img
-              src="/images/bank_photo.png"
+              src="/images/bank_photo1.jpeg"
               alt={HERO.bankImageAlt}
               width="720"
               height="480"
