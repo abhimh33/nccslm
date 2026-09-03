@@ -11,10 +11,11 @@ export const SITE = {
     { label: 'ಸಂಪರ್ಕ ಸಂಖ್ಯೆ', number: '9845666202', tel: '+919845666202' },
     { label: 'ಸಂಪರ್ಕ ಸಂಖ್ಯೆ', number: '9880466494', tel: '+919880466494' },
   ],
-  email: 'nccslm1993@gmail.com',
+  email: 'info@nccslm.in',
+  emailHero: 'info@nccslm.in',
   // English address
   addressEn: [
-    'NETHAJI CREDIT CO OPERATIVE SOCIETY LTD.',
+    'NETHAJI CREDIT CO-OPERATIVE SOCIETY LTD.',
     'NO-569/A, SRI G RAMAIAH MAIN ROAD,',
     'SRI M B RAJASHEKAR CROSS ROAD,',
     'MATHIKERE, BANGALORE - 560054',
@@ -22,7 +23,7 @@ export const SITE = {
   // Kannada address
   addressKn: [
     'ನೇತಾಜಿ ಕ್ರೆಡಿಟ್ ಕೋ ಆಪರೇಟಿವ್ ಸೊಸೈಟಿ ಲಿ.',
-    'ನಂ-569/ಆ, ಶ್ರೀ ಜಿ ರಾಮಯ್ಯ ಮುಖ್ಯರಸ್ತೆ,',
+    'ನಂ-569/ಎ, ಶ್ರೀ ಜಿ ರಾಮಯ್ಯ ಮುಖ್ಯರಸ್ತೆ,',
     'ಶ್ರೀ ಎಂ.ಬಿ ರಾಜಶೇಖರ ಅಡ್ಡರಸ್ತೆ,',
     'ಮತ್ತಿಕೆರೆ, ಬೆಂಗಳೂರು - 560054',
   ],
@@ -73,7 +74,9 @@ export const DEPOSIT_SERVICES = {
   items: [
     'ಖಾಯಂ ಠೇವಣಿ',
     'ಉಳಿತಾಯ ಠೇವಣಿ',
-    'ನೇತಾಜಿ ನಗದು ಪತ್ರ ಠೇವಣಿ',
+    'ನಗದು ಪತ್ರ ಠೇವಣಿ',
+    'ಆವರ್ತಕ ಠೇವಣಿ',
+    'ಇ-ಸ್ಟಾಂಪ್ ಪೇಪರ್ ಸೌಲಭ್ಯ',
   ],
 }
 
