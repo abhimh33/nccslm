@@ -137,7 +137,7 @@ export default function HeroSection() {
         {/* ── Row photo — full width below the two columns, preserves full aspect ratio ── */}
         <div className="mt-6 w-full">
           <img
-            src="/images/row_photo3.jpeg"
+            src="/images/row_photo4.jpeg"
             alt={HERO.groupImageAlt}
             width="1200"
             height="400"
